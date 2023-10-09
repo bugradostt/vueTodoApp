@@ -19,15 +19,15 @@
     
 </form>
 <hr>
-<div class="card my-5 mx-5"  v-for="i in todos" v-bind:key="i" >
+<div class="card my-5 mx-5 cursor" @click="Done(i)"  v-for="i in todos" v-bind:key="i" >
  
   <div class="card-content">
     <div class="media">
       <div class="media-left">
       </div>
       <div class="media-content">
-        <p class="title is-4">{{ i.content }}</p>
-        <p class="subtitle is-6">
+        <p class="title is-4 " :class="{done:i.done}">{{ i.content }}</p>
+        <!-- <p class="subtitle is-6">
           <span v-if="i.done == true">
             Yapıldı
           </span>
@@ -35,7 +35,7 @@
             Yapılmadı
           </span>
 
-        </p>
+        </p> -->
       </div>
     </div>
 
@@ -63,10 +63,16 @@ export default{
 
    }
 
+   function Done(todo)
+   {
+      todo.done = !todo.done;
+   }
+
    return{
     todo,
     todos,
-    AddTodo
+    AddTodo,
+    Done
    }
   },
 }
@@ -75,6 +81,14 @@ export default{
 
 
 <style scoped>
+.cursor{
+  cursor: pointer;
+}
+
+.done{
+  text-decoration: line-through;
+  color:lightgrey;
+}
 
 </style>
 
